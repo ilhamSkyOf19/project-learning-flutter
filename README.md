@@ -1,16 +1,16 @@
-# flutter_application_1
+# 🏥 Aplikasi Data Pegawai & Pasien
 
-A new Flutter project.
+Aplikasi Flutter sederhana untuk mengelola data **Pegawai dan Pasien** dalam satu form.  
+Proyek ini dibuat sebagai bagian dari latihan/tugas pembelajaran Flutter, dengan fokus pada implementasi **form input**, **navigasi antar halaman**, dan **pengelolaan data sederhana menggunakan model**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Fitur Utama
 
-A few resources to get you started if this is your first Flutter project:
+- 🧾 Form input **Pegawai & Pasien** menjadi satu halaman
+- ✏️ Tombol **Ubah** untuk mengedit data yang sudah ada
+- 🗑️ Tombol **Hapus** untuk menghapus data (sementara, tanpa database)
+- 🔍 Halaman **Detail** untuk menampilkan hasil input
+- 📱 Tampilan clean menggunakan **Material Design**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
