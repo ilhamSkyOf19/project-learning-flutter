@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/poli.dart';
 import 'poli_detail.dart';
-import 'pegawai_pasien_form.dart';
+import 'poli_form.dart';
 
 class PoliPage extends StatefulWidget {
   const PoliPage({super.key});
@@ -11,6 +11,24 @@ class PoliPage extends StatefulWidget {
 }
 
 class _PoliPageState extends State<PoliPage> {
+  // Awalnya kosong (belum ada data)
+  final List<Poli> daftarPoli = [];
+
+  // Fungsi tambah poli
+  void _tambahPoli() async {
+    final Poli? hasil = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PoliForm()),
+    );
+
+    // Jika user menekan "Simpan" dan mengirim data balik
+    if (hasil != null) {
+      setState(() {
+        daftarPoli.add(hasil);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,70 +41,36 @@ class _PoliPageState extends State<PoliPage> {
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Icon(Icons.add, color: Colors.white),
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PegawaiPasienForm(),
-                ),
-              );
-            },
+            onTap: _tambahPoli,
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          const SizedBox(height: 20),
-          GestureDetector(
-            child: const Card(child: ListTile(title: Text("Poli Anak"))),
-            onTap: () {
-              Poli poliAnak = Poli(namaPoli: "Poli Anak");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PoliDetail(poli: poliAnak),
-                ),
-              );
-            },
-          ),
-          GestureDetector(
-            child: const Card(child: ListTile(title: Text("Poli Gigi"))),
-            onTap: () {
-              Poli poliGigi = Poli(namaPoli: "Poli Gigi");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PoliDetail(poli: poliGigi),
-                ),
-              );
-            },
-          ),
-          GestureDetector(
-            child: const Card(child: ListTile(title: Text("Poli Mata"))),
-            onTap: () {
-              Poli poliMata = Poli(namaPoli: "Poli Mata");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PoliDetail(poli: poliMata),
-                ),
-              );
-            },
-          ),
-          GestureDetector(
-            child: const Card(child: ListTile(title: Text("Poli Paru"))),
-            onTap: () {
-              Poli poliParu = Poli(namaPoli: "Poli Paru");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PoliDetail(poli: poliParu),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+
+      // Cek apakah ada data
+      body: daftarPoli.isEmpty
+          ? const Center(
+              child: Text(
+                "Belum ada data poli.",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            )
+          : ListView.builder(
+              itemCount: daftarPoli.length,
+              itemBuilder: (context, index) {
+                final poli = daftarPoli[index];
+                return GestureDetector(
+                  child: Card(child: ListTile(title: Text(poli.namaPoli))),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PoliDetail(poli: poli),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
     );
   }
 }
